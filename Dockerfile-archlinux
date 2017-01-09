@@ -1,0 +1,15 @@
+# vim:set ft=dockerfile:
+FROM finalduty/archlinux:latest
+
+MAINTAINER Andrius Kairiukstis <andrius@kairiukstis.com>
+
+RUN pacman -Sy --noconfirm weechat python2 lua tcl ruby aspell guile \
+&&  pacman -Scc --noconfirm; rm -r /usr/share/man/*; ls -d /usr/share/locale/* | egrep -v "alias|en_US" | xargs rm -rf
+
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+
+EXPOSE 9001
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["weechat"]
+

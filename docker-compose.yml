@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  weechat:
+    build: .
+    environment:
+      - HOST_USER=${USER}
+    ports:
+      - 9001/tcp:9001/tcp
+    volumes:
+      - ./config:/home/${USER}/.weechat
+
